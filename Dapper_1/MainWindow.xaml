@@ -1,51 +1,46 @@
 ﻿<Window x:Class="WpfApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Mailing List" Height="450" Width="800">
-    <Window.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Grid>
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"/>
-                            <TextBlock Text="Enter Text Here"
-                                       Foreground="Gray"
-                                       Margin="5,0,0,0"
-                                       VerticalAlignment="Center"
-                                       IsHitTestVisible="False">
-                                <TextBlock.Style>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                            <ScrollViewer x:Name="PART_ContentHost"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Mailing List App" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
     <Grid>
-        <StackPanel>
-            <Button Name="ConnectButton" Content="Connect" Click="ConnectButton_Click"/>
-            <TextBox Name="OutputTextBox" Height="300" Width="700" TextWrapping="Wrap" AcceptsReturn="True"/>
-            <TextBox Name="CityTextBox" Width="200"/>
-            <Button Name="CityButton" Content="Show Customers By City" Click="CityButton_Click"/>
-            <TextBox Name="CountryTextBox" Width="200"/>
-            <Button Name="CountryButton" Content="Show Customers By Country" Click="CountryButton_Click"/>
-            <Button Name="CountryPromotionsButton" Content="Show Promotions By Country" Click="CountryPromotionsButton_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Top Panel -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="16">
+            <Button Content="Connect" Click="ConnectButton_Click" Margin="0 0 16 0"
+                    Style="{StaticResource MaterialDesignFlatButton}"/>
+
+            <TextBox x:Name="CityTextBox" Width="200" Margin="0 0 16 0"/>
+
+            <Button Content="Filter by City" Click="CityButton_Click"
+                    Style="{StaticResource MaterialDesignFlatButton}"/>
+
+            <TextBox x:Name="CountryTextBox" Width="200" Margin="16 0 16 0"/>
+
+            <Button Content="Filter by Country" Click="CountryButton_Click"
+                    Style="{StaticResource MaterialDesignFlatButton}"/>
         </StackPanel>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" Margin="16">
+            <StackPanel>
+                <TextBox x:Name="OutputTextBox" IsReadOnly="True" MinHeight="300" Margin="0 0 0 16"/>
+
+                <Button Content="Load All" Click="LoadAllButton_Click" HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignRaisedButton}" Margin="0 16 16 0"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>
