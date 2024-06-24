@@ -1,12 +1,16 @@
-﻿<Window x:Class="Dapper_1.MainWindow"
+﻿<Window x:Class="WpfApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Dapper_1"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Mailing List" Height="450" Width="800">
     <Grid>
-
+        <StackPanel>
+            <Button Name="ConnectButton" Content="Connect" Click="ConnectButton_Click"/>
+            <TextBox Name="OutputTextBox" Height="300" Width="700" TextWrapping="Wrap" AcceptsReturn="True"/>
+            <TextBox Name="CityTextBox" Text="Enter City" Width="200" IsReadOnly="True" Foreground="LightGray"/>
+            <Button Name="CityButton" Content="Show Customers By City" Click="CityButton_Click"/>
+            <TextBox Name="CountryTextBox" Text="Enter Country" Width="200" IsReadOnly="True" Foreground="LightGray"/>
+            <Button Name="CountryButton" Content="Show Customers By Country" Click="CountryButton_Click"/>
+            <Button Name="CountryPromotionsButton" Content="Show Promotions By Country" Click="CountryPromotionsButton_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
